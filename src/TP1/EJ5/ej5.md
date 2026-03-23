@@ -1,0 +1,6 @@
+# Ejercicio 5
+
+Escriba un procedimiento que dadas dos listas construya otra con los elementos comunes,
+suponiendo que: 
+- a) Las listas están desordenadas y la lista resultante debe quedar ordenada
+- b) Las listas están ordenadas y la lista resultante debe mantenerse ordenada
