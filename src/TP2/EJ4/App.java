@@ -9,7 +9,7 @@ public class App {
             System.out.print(fibonacchi(i) + " " );
         }
     }
-
+    //O(n)
     public static void secFibonacci(int ite,int ant1, int ant2){
         if (ite == 0) {
             return;
@@ -17,6 +17,7 @@ public class App {
         System.out.print(ant1 + " ");
         secFibonacci(ite - 1, ant2, ant1+ant2);
     }
+    //complejidad computacional O(2^n)
     public static int fibonacchi(int n){
         if (n < 2){
             return n;
