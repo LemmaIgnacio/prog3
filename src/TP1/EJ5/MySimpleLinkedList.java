@@ -12,6 +12,78 @@ public class MySimpleLinkedList<T extends Comparable<T>> implements Iterable<T> 
         this.size = 0;
     }
 
+    public MySimpleLinkedList<T> ordenada(MySimpleLinkedList<T> list1, MySimpleLinkedList<T> list2) {
+        MySimpleLinkedList<T> res = new MySimpleLinkedList<>();
+        Iterator<T> it1 = list1.iterator();
+        Iterator<T> it2 = list2.iterator();
+        if (!it1.hasNext() || !it2.hasNext()) {
+            return res;
+        }
+        T e1 = it1.next();
+        T e2 = it2.next();
+        while (e1 != null && e2 != null) {
+            int comp = e1.compareTo(e2);
+            if (comp == 0) {
+                if (res.indexOf(e1) == -1) {
+                    res.insertOrdered(e1);
+                }
+                if (it1.hasNext()) {
+                    e1 = it1.next();
+                } else {
+                    e1 = null;
+                }
+                if (it2.hasNext()) {
+                    e2 = it2.next();
+                } else {
+                    e2 = null;
+                }
+            }
+            else if (comp < 0) {
+                if (it1.hasNext()) {
+                    e1 = it1.next();
+                } else {
+                    e1 = null;
+                }
+            }
+            else {
+                if (it2.hasNext()) {
+                    e2 = it2.next();
+                } else {
+                    e2 = null;
+                }
+            }
+        }
+        return res;
+    }
+
+    public MySimpleLinkedList<T> desordenada(MySimpleLinkedList<T> list1, MySimpleLinkedList<T> list2) {
+        MySimpleLinkedList<T> res = new MySimpleLinkedList<>();
+        for (T e : list1) {
+            if (list2.indexOf(e) != -1 && res.indexOf(e) == -1) {
+                res.insertOrdered(e);
+            }
+        }
+        return res;
+    }
+
+    public void insertOrdered(T info) {
+        Node<T> nuevo = new Node<>(info, null);
+        if (this.first == null || info.compareTo(this.first.getInfo()) < 0) {
+            nuevo.setNext(this.first);
+            this.first = nuevo;
+            this.size++;
+            return;
+        }
+        Node<T> cursor = this.first;
+        while (cursor.getNext() != null &&
+                cursor.getNext().getInfo().compareTo(info) < 0) {
+            cursor = cursor.getNext();
+        }
+        nuevo.setNext(cursor.getNext());
+        cursor.setNext(nuevo);
+        this.size++;
+    }
+
     @Override
     public Iterator<T> iterator() {
         return new MyIterator<>(this.first);
