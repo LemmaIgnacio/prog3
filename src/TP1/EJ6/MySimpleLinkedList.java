@@ -1,4 +1,4 @@
-package TP1.EJ5;
+package TP1.EJ6;
 
 import java.util.Iterator;
 
@@ -10,6 +10,17 @@ public class MySimpleLinkedList<T extends Comparable<T>> implements Iterable<T> 
     public MySimpleLinkedList() {
         this.first = null;
         this.size = 0;
+    }
+
+    public MySimpleLinkedList<T> diferencia(MySimpleLinkedList<T> list1, MySimpleLinkedList<T> list2) {
+        MySimpleLinkedList<T> res = new MySimpleLinkedList<>();
+        for (T e : list1) {
+            //verifica que el elmento NO este en list2 ni este repetido
+            if (list2.indexOf(e) == -1 && res.indexOf(e) == -1) {
+                res.insertOrdered(e);
+            }
+        }
+        return res;
     }
 
     public MySimpleLinkedList<T> ordenada(MySimpleLinkedList<T> list1, MySimpleLinkedList<T> list2) {
