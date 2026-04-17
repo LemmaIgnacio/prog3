@@ -1,0 +1,105 @@
+# Ejercicio 5
+Dado un Hashtable de Java con M = 6 y rho = 0.70.
+
+A) Mostrar la estructura resultante al insertar las claves: {17, 4, 5, 10, 12}
+- M=6, rho=0.70, rp=1, l=4
+- l = 6*1*0,7= 4.2
+- h(17) = 17 mod 6 = 5
+- tabla (count 1):
+  - 0 -> []
+  - 1 -> []
+  - {...}
+  - 5 -> [17]
+- h(4) = 4 mod 6 = 4
+- tabla (count 2):
+    - 0 -> []
+    - 1 -> []
+    - 2 -> []
+    - 3 -> []
+    - 4 -> [4]
+    - 5 -> [17]
+- h(5) = 5 mod 6 = 5
+- tabla (count 3):
+    - 0 -> []
+    - 1 -> []
+    - 2 -> []
+    - 3 -> []
+    - 4 -> [4]
+    - 5 -> [17] | [5]
+- h(10) = 10 mod 6 = 4
+- tabla (count 4):
+    - 0 -> []
+    - 1 -> []
+    - 2 -> []
+    - 3 -> []
+    - 4 -> [4] | [10]
+    - 5 -> [17] | [5]
+- Dado que count =4 y count >= 4, rehash
+- M = 2*M + 1 = 2*6+1 = 13
+- L = 13*1*0,7 = 9,1 = 9
+    - h(17) = 17%13= 4
+    - h(4) = 4%13 = 4
+    - h(5) = 5%13 = 5
+    - h(10) = 10%13 = 10
+- tabla (count 4):
+    - 0 -> []
+    - 1 -> []
+    - 2 -> []
+    - 3 -> []
+    - 4 -> [17] | [4]
+    - 5 -> [5]
+    - 6 -> []
+    - 7 -> []
+    - 8 -> []
+    - 9 -> []
+    - 10 -> [10]
+- h(12) = 12 mod 13 = 12
+- tabla (count 5):
+    - 0 -> []
+    - 1 -> []
+    - 2 -> []
+    - 3 -> []
+    - 4 -> [17] | [4]
+    - 5 -> [5]
+    - 6 -> []
+    - 7 -> []
+    - 8 -> []
+    - 9 -> []
+    - 10 -> [10]
+    - 11 -> []
+    - 12 -> [12]
+B) Insertar el valor 13 y muestre la estructura resultante.
+- h(13) = 13 mod 13 = 0
+- tabla (count 6):
+    - 0 -> [13]
+    - 1 -> []
+    - 2 -> []
+    - 3 -> []
+    - 4 -> [17] | [4]
+    - 5 -> [5]
+    - 6 -> []
+    - 7 -> []
+    - 8 -> []
+    - 9 -> []
+    - 10 -> [10]
+    - 11 -> []
+    - 12 -> [12]
+C) Cuantas claves adicionales se deberian insertar para que sea necesario modificar el tamaño de la estructura primaria?
+    - Mientras que el contador, sea menor a la cantidad de inserciones antes del reshash (L) no se necesita agregar
+    - En este ejercicio:
+    - if(count >= L) -> rehash
+    - insertar elemento
+    - count++
+    - Por lo que al principio tenemos un L de 4
+    - Cuando se insertaron los primeros 4 elementos
+    - Se tuvo que hacer un rehash,
+    - Y se amplio a 9,
+    - Junto a la insercion del 13 (punto B)
+    - Tendriamos un total de 6 claves
+    - Por lo que faltan 3 claves adicionales antes de modificar el tamanio
+
+D) Por lo visto en el paso a paso, prodriamos asegurar que un rho elegido de forma precisa evitaria por completo la necesidad de contar con una estructura de rebalse?
+- No porque el rebalse depende de las coliciones no solo del rho
+- Un valor bajo reduce la probabilidad de rebalse
+- Pero las coliciones dependen de la distribucion de las claves
+- Por lo que siempre es necesario utilizar estructuras de rebalse
